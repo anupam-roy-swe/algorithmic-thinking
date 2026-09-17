@@ -15,6 +15,7 @@
 |  |
 | ------- |
 | [0001-two-sum](https://github.com/anupam-roy-swe/algorithmic-thinking/tree/master/0001-two-sum) |
+| [0012-integer-to-roman](https://github.com/anupam-roy-swe/algorithmic-thinking/tree/master/0012-integer-to-roman) |
 ## Binary Search
 |  |
 | ------- |
@@ -23,4 +24,12 @@
 |  |
 | ------- |
 | [0004-median-of-two-sorted-arrays](https://github.com/anupam-roy-swe/algorithmic-thinking/tree/master/0004-median-of-two-sorted-arrays) |
+## Math
+|  |
+| ------- |
+| [0012-integer-to-roman](https://github.com/anupam-roy-swe/algorithmic-thinking/tree/master/0012-integer-to-roman) |
+## String
+|  |
+| ------- |
+| [0012-integer-to-roman](https://github.com/anupam-roy-swe/algorithmic-thinking/tree/master/0012-integer-to-roman) |
 <!---LeetCode Topics End-->
