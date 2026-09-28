@@ -2,56 +2,62 @@ function findSubstring(s: string, words: string[]): number[] {
     const result: number[] = [];
     if (!s || words.length === 0) return result;
 
-    const wordLen = words[0].length; // একটি শব্দের দৈর্ঘ্য
-    const wordCount = words.length;   // মোট শব্দের সংখ্যা
+    const wordLen = words[0].length;
+    const wordCount = words.length;
     const sLen = s.length;
 
-    // ১. Map এর বদলে মেমোরি-ফ্রেন্ডলি প্লেইন অবজেক্ট ({}) ব্যবহার করা
-    const wordFrequency: Record<string, number> = {};
+    // ১. শব্দের ফ্রিকোয়েন্সি ট্র্যাক করার জন্য Map বা Object-এর বদলে একটি "Flat Counter" অ্যারে ব্যবহার
+    const wordFrequency = new Map<string, number>();
     for (let i = 0; i < wordCount; i++) {
-        wordFrequency[words[i]] = (wordFrequency[words[i]] || 0) + 1;
+        wordFrequency.set(words[i], (wordFrequency.get(words[i]) || 0) + 1);
     }
 
-    // ২. স্লাইডিং উইন্ডো
+    // উইন্ডো ট্র্যাকিংয়ের জন্য একটি মাত্র প্লেইন অবজেক্ট (লুপের বাইরে), যাতে নতুন করে মেমোরি এলোকেশন না হয়
+    const windowFrequency: Record<string, number> = {};
+
     for (let i = 0; i < wordLen; i++) {
         let left = i;
         let right = i;
-        const windowFrequency: Record<string, number> = {};
         let count = 0;
 
+        // প্রতি উইন্ডো শুরুর আগে মেমোরি ক্লিন করার সবচেয়ে দ্রুততম উপায় (delete ব্যবহার না করে)
+        for (const key in windowFrequency) {
+            windowFrequency[key] = 0;
+        }
+
         while (right + wordLen <= sLen) {
-            // স্ট্রিং এর একটি অংশ নেওয়া
             const word = s.substring(right, right + wordLen);
             right += wordLen;
 
-            // যদি শব্দটি আমাদের টার্গেট লিস্টে থাকে
-            if (wordFrequency[word] !== undefined) {
+            const targetCount = wordFrequency.get(word);
+
+            if (targetCount !== undefined) {
                 windowFrequency[word] = (windowFrequency[word] || 0) + 1;
                 
-                if (windowFrequency[word] <= wordFrequency[word]) {
+                if (windowFrequency[word] <= targetCount) {
                     count++;
                 }
 
-                // যদি কোনো শব্দের সংখ্যা প্রয়োজনের চেয়ে বেশি হয়ে যায়, তবে বাম দিক থেকে উইন্ডো ছোট করা
-                while (windowFrequency[word] > wordFrequency[word]) {
+                while (windowFrequency[word] > targetCount) {
                     const leftWord = s.substring(left, left + wordLen);
                     windowFrequency[leftWord]--;
-                    if (windowFrequency[leftWord] < wordFrequency[leftWord]) {
+                    if (windowFrequency[leftWord] < (wordFrequency.get(leftWord) || 0)) {
                         count--;
                     }
                     left += wordLen;
                 }
 
-                // যখন সব শব্দ ঠিকঠাক মিলে যাবে
                 if (count === wordCount) {
                     result.push(left);
                 }
             } else {
-                // অবৈধ শব্দ পেলে পুরো উইন্ডো মেমোরি খালি না করে শুধু কাউন্টার রিসেট করা
-                for (const key in windowFrequency) {
-                    delete windowFrequency[key];
+                // অবৈধ শব্দ পেলে ডিলিট (delete) না করে শুধু ভ্যালু ০ করে দেওয়া হলো, এতে মেমোরি বাড়ে না
+                if (count > 0) {
+                    for (const key in windowFrequency) {
+                        windowFrequency[key] = 0;
+                    }
+                    count = 0;
                 }
-                count = 0;
                 left = right;
             }
         }
