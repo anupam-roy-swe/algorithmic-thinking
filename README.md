@@ -16,6 +16,7 @@
 | ------- |
 | [0001-two-sum](https://github.com/anupam-roy-swe/algorithmic-thinking/tree/master/0001-two-sum) |
 | [0012-integer-to-roman](https://github.com/anupam-roy-swe/algorithmic-thinking/tree/master/0012-integer-to-roman) |
+| [0030-substring-with-concatenation-of-all-words](https://github.com/anupam-roy-swe/algorithmic-thinking/tree/master/0030-substring-with-concatenation-of-all-words) |
 ## Binary Search
 |  |
 | ------- |
@@ -33,6 +34,7 @@
 |  |
 | ------- |
 | [0012-integer-to-roman](https://github.com/anupam-roy-swe/algorithmic-thinking/tree/master/0012-integer-to-roman) |
+| [0030-substring-with-concatenation-of-all-words](https://github.com/anupam-roy-swe/algorithmic-thinking/tree/master/0030-substring-with-concatenation-of-all-words) |
 ## Linked List
 |  |
 | ------- |
@@ -49,4 +51,8 @@
 |  |
 | ------- |
 | [0023-merge-k-sorted-lists](https://github.com/anupam-roy-swe/algorithmic-thinking/tree/master/0023-merge-k-sorted-lists) |
+## Sliding Window
+|  |
+| ------- |
+| [0030-substring-with-concatenation-of-all-words](https://github.com/anupam-roy-swe/algorithmic-thinking/tree/master/0030-substring-with-concatenation-of-all-words) |
 <!---LeetCode Topics End-->
